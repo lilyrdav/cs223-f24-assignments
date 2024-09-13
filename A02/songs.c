@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
+//Define the song struct
 typedef struct song {
   int duration;
   float danceability;
@@ -19,6 +20,7 @@ typedef struct song {
   char title[32];
 } song;
 
+//Function that prints out the song list.
 void songList(song songs[]) {
   printf("Welcome to Lily Davoren's Song List.\n\n");
   for (int i = 0; i < 3; i++) {
@@ -37,6 +39,7 @@ int main() {
 
   songList(songs);
 
+  //Asks user to input song id for editing
   printf("Enter a song id to edit [0, 1, 2]: ");
   int id;
   scanf("%d", &id);
@@ -46,6 +49,7 @@ int main() {
     scanf("%d", &id);
   }
 
+  //Allows user to edit song list attribute of their choosing
   printf("Which attribute do you wish to edit? [duration, danceability, artist, title]: ");
   char attribute[32];
   scanf("%s", attribute);

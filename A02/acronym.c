@@ -16,11 +16,14 @@ int main() {
   printf("Enter a phrase: ");
   scanf("%[^\n]%*c", phrase);
   printf("Your acronym is: ");
+
+  //Loops through the entered phrase, searching for capital letters, and prints them.
   for (int i = 0; i < strlen(phrase); i++) {
     if (phrase[i] > 64 && phrase[i] < 91) {
       printf("%c", phrase[i]);
     }
   }
+
   printf("\n");
   return 0;
 }

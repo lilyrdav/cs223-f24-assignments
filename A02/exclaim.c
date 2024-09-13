@@ -29,6 +29,7 @@ int main() {
       buff[i] = random_char;
     }
   }
+  
   printf("%s\n", buff);
   return 0;
 }

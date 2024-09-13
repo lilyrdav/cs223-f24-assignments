@@ -19,6 +19,9 @@ int main() {
   printf("Enter a word: ");
   scanf("%s", buff);
   printf("OMG! ");
+  
+  // Loops through the entered exclamation and replaces any lowercase letters 
+  // with one of the random characters stored in the array above.
   for (int i = 0; i < strlen(buff); i++) {
     if (buff[i] > 96 && buff[i] < 123) {
       int random_index = rand() % 4;

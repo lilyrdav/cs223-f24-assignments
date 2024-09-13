@@ -1,3 +1,14 @@
+/**
+* The main driver program for A02 exclaim.c.
+*
+* This program turns a word into an exclaimation. The program loops through each
+* character. If the character is a lowercase letter, it is replaced with a randomly
+* chosen character from the set {'@', '!', '#', '*'}.
+*
+* @author: Lily Davoren
+* @version: September 12, 2024
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

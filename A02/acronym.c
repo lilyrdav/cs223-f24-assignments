@@ -1,3 +1,13 @@
+/**
+* The main driver program for A02 acronym.c.
+*
+* This program computes an acronym from a given phrase. The program creates
+* a string consisting of all capital letters from the given phrase.
+*
+* @author: Lily Davoren
+* @version: September 12, 2024
+*/
+
 #include <stdio.h>
 #include <string.h>
 

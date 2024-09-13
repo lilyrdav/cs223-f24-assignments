@@ -1,3 +1,14 @@
+/**
+* The main driver program for A02 songs.c.
+*
+* This code implements a program, songs.c, that fills an array
+* with three or more songs and then allows the user to edit the 
+* data in the array.
+*
+* @author: Lily Davoren
+* @version: September 12, 2024
+*/
+
 #include <stdio.h>
 #include <string.h>
 

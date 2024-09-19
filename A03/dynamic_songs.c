@@ -26,7 +26,7 @@ void songList(song songs[], int numSongs) {
         songs[i].energy, songs[i].tempo, songs[i].valence);
   }
   for (int i = 10; i < numSongs; i++) {
-    printf("%d) %-29s artist: %-20s duration: %d:%-17d danceability: %-20.3f energy: %-20.3f tempo: %-20.3f valence: %.3f\n\n", 
+    printf("%d) %-29s artist: %-20s duration: %d:%-20d danceability: %-20.3f energy: %-20.3f tempo: %-20.3f valence: %.3f\n\n", 
       i, songs[i].title, songs[i].artist, songs[i].duration/60000, (songs[i].duration - songs[i].duration/60000*60000)/1000, songs[i].danceability, 
         songs[i].energy, songs[i].tempo, songs[i].valence);
   }

@@ -1,12 +1,22 @@
-/*----------------------------------------------
- * Author: 
- * Date: 
- * Description
- ---------------------------------------------*/
+/**
+* The main driver program for A03 dynamic_songs.c.
+*
+* This code implements a program, dynamic_songs.c, that reads songs from a text file into an array. The program has the 
+* following features:
+*   The ability to open a CSV file (songlist.csv) and read its contents into an array created with malloc.
+*   The ability to read in additional information: tempo, valence, and energy.
+*   The ability to run with memory leaks or valgrind errors
+*   The ability to set the contents of our dynamic array of songs, based on the file
+*   The ability to print out the list of songs
+*
+* @author: Lily Davoren
+* @version: September 18, 2024
+*/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
+//Struct that holds the information for each song.
 typedef struct song {
   char title[128];
   char artist[128];
@@ -43,7 +53,7 @@ int main() {
   firstElements = strtok(firstLine, ",");
   int songlistLength = atoi(&firstElements[0]);
 
-  //Read and store the second line of the file to determine the name of each category
+  //Skip the second line of the file
   char secondLine[300];
   fgets(secondLine, 300, fp);
 

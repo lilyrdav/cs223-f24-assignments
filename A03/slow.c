@@ -1,8 +1,12 @@
-/*----------------------------------------------
- * Author: 
- * Date: 
- * Description
- ---------------------------------------------*/
+/**
+* The main driver program for A03 slow.c.
+*
+* This program turns a phrase into ent-speech. The program asks for the pause length and a phrase to change and outputs
+* an ent-phrase. Ent-phrases contain '.' between each letter in the input.
+*
+* @author: Lily Davoren
+* @version: September 19, 2024
+*/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

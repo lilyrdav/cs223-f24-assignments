@@ -14,11 +14,11 @@ int main(int argc, char* argv[]) {
   }
 
   //Dynamically allocate a 2D array
-  char* two_d_array = malloc(sizeof(char) * (strlen(argv[1]) * strlen(argv[2])));
+  char* two_d_array = malloc(sizeof(char) * strlen(argv[1]) * strlen(argv[2]));
 
   //Find the common letter between the two words and make note of the row and column
-  int row = 0;
-  int col = 0;
+  int row = -1;
+  int col = -1;
   for (int k = 0; k < strlen(argv[1]); k++) {
     for (int l = 0; l < strlen(argv[2]); l++) {
       if ((argv[1])[k] == (argv[2])[l]) {
@@ -26,13 +26,15 @@ int main(int argc, char* argv[]) {
         col = l;
         break;
       }
-      else {
-        printf("No common letter found between the two words.\n");
-        free(two_d_array);
-        exit(0);
-      }
     }
+    if (row != -1 && col != -1) break;
   }
+
+if (row == -1 || col == -1) {
+  printf("No common letter found.\n");
+  free(two_d_array);
+  return 0;
+}
 
   //Fill in the 2D array with the first word
   for (int m = 0; m < strlen(argv[1]); m++) {
@@ -56,7 +58,7 @@ int main(int argc, char* argv[]) {
   //Print the 2D array
   for (int q = 0; q < strlen(argv[1]); q++) {
     for (int r = 0; r < strlen(argv[2]); r++) {
-      printf("%c", two_d_array[q * strlen(argv[2]) + r]);
+      printf(" %c", two_d_array[q * strlen(argv[2]) + r]);
     }
     printf("\n");
   }

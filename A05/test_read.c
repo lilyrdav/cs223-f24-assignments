@@ -1,8 +1,12 @@
-/*----------------------------------------------
- * Author: 
- * Date: 
- * Description
- ---------------------------------------------*/
+/**
+* The main driver program for A05 test_read.c.
+*
+* This program contains a short test that calls the read_ppm() function in read_ppm.c and prints the contents of feep-raw.ppm
+*
+* @author: Lily Davoren
+* @version: October 3, 2024
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "read_ppm.h"

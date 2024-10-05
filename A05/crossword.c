@@ -1,8 +1,14 @@
-/*----------------------------------------------
- * Author: 
- * Date: 
- * Description
- ---------------------------------------------*/
+/**
+* The main driver program for A05 crossword.c.
+*
+* This program generates a crossword using two words from a user. The program creates a 2D array of characters 
+* to hold your crossword puzzle. The algorithm identifies a common letter between the given words and lists one
+* word vertically and the other word horizontally. If there is no common letter, the program prints a message and quits.
+*
+* @author: Lily Davoren
+* @version: October 1, 2024
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

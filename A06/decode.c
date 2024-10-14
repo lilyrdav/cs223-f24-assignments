@@ -1,7 +1,7 @@
 /*----------------------------------------------
- * Author: 
- * Date: 
- * Description
+ * Author: Lily Davoren
+ * Date: October 13, 2024
+ * Description: This program reads in a PPM file and decodes a message from the least significant bit of each color channel of each pixel.
  ---------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,7 +18,7 @@ char* get_substring(char* string, int position, int length) {
   free(substring);
 }
 
-int binary_to_decimal(const char *binary) {
+int binary_to_decimal(char *binary) {
     int decimal = 0;
     for (int i = 0; i < 8; i++) {
         if (binary[i] == '1') {
@@ -34,8 +34,8 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-  int w = 4;
-  int h = 4;
+  int w = 606;
+  int h = 771;
   struct ppm_pixel* pixels = read_ppm(argv[1], &w, &h);
   if (pixels == NULL) {
     printf("Error reading file\n");
@@ -45,8 +45,8 @@ int main(int argc, char** argv) {
   printf("Reading %s with width %d and height %d\n", argv[1], w, h);
   printf("Max number of characters in the image: %d\n", ((w * h * 3) / 8));
 
-  char* binary = (char*)malloc((w * h * 3)/8);
-  for (int i = 0; i < w * h; i++) {
+  char* binary = (char*)malloc((w * h * 3));
+  for (int i = 0; i < w * h * 3; i++) {
     if (pixels[i].red % 2 == 0) {
       binary[i * 3] = '0';
     } else {

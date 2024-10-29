@@ -1,6 +1,6 @@
 /*----------------------------------------------
- * Author: 
- * Date: 
+ * Author: Lily Davoren
+ * Date: October 9, 2024
  * Description: This program implements a program that reads
  * in a single 64-bit unsigned integer and outputs it as an 8x8 1bpp sprite. The program
  * uses a bitmask. For example, to generate a 64-bit mask that obtains
@@ -20,8 +20,4 @@ int main() {
       unsigned long mask = 0x1ul << (63 - (i * 8 + j));
       printf(" %c", (img & mask) ? '@' : ' ');
     }
-    printf("\n");
-  }
-
-  return 0;
-}
+    printf

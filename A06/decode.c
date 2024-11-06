@@ -1,8 +1,13 @@
-/*----------------------------------------------
- * Author: Lily Davoren
- * Date: October 13, 2024
- * Description: This program reads in a PPM file and decodes a message from the least significant bit of each color channel of each pixel.
- ---------------------------------------------*/
+/**
+* The main driver program for A05 decode.c.
+*
+* This program reads in a PPM file and decodes a message from the least 
+* significant bit of each color channel of each pixel.
+
+* @author: Lily Davoren
+* @version: October 13, 2024
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "read_ppm.h"
@@ -19,13 +24,13 @@ char* get_substring(char* string, int position, int length) {
 }
 
 int binary_to_decimal(char *binary) {
-    int decimal = 0;
-    for (int i = 0; i < 8; i++) {
-        if (binary[i] == '1') {
-            decimal += (1 << (7 - i));
-        }
+  int decimal = 0;
+  for (int i = 0; i < 8; i++) {
+    if (binary[i] == '1') {
+      decimal += (1 << (7 - i));
     }
-    return decimal;
+  }
+  return decimal;
 }
 
 int main(int argc, char** argv) {

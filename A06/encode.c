@@ -1,3 +1,16 @@
+/**
+* The main driver program for A05 encode.c.
+*
+* This program reads in a PPM file and encodes a message into the least
+* significant bit of each color channel of each pixel. The message is
+* read from the user and encoded into the image. The encoded image is
+* saved to a new file with the suffix "-encoded.ppm". The program uses
+* the read_ppm and write_ppm functions to read and write the image.
+*
+* @author: Lily Davoren
+* @version: October 13, 2024
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

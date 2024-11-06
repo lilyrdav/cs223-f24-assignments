@@ -69,13 +69,4 @@ if (row == -1 || col == -1) {
   //Print the 2D array
   for (int q = 0; q < strlen(argv[1]); q++) {
     for (int r = 0; r < strlen(argv[2]); r++) {
-      printf(" %c", two_d_array[q * strlen(argv[2]) + r]);
-    }
-    printf("\n");
-  }
-
-  //Free the 2D array
-  free(two_d_array);
-
-  return 0;
-}
+      print

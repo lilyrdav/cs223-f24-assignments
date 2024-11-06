@@ -16,15 +16,12 @@
 
 int main(int argc, char** argv) {
   if (argc < 3) {
-    printf("Usage: %s <width> <height>\n", argv[0]);
+    printf("Usage: %s\n", argv[0]);
     exit(0);
   }
 
-  char* width = argv[1];
-  char* height = argv[2];
-
-  int w = atoi(width);
-  int h = atoi(height);
+  int w = 4;
+  int h = 4;
 
   // Read in the PPM file
   struct ppm_pixel* pixels = read_ppm("feep-raw.ppm", &w, &h);

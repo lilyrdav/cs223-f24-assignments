@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
   // Read in the new PPM file
   struct ppm_pixel* pixels2 = read_ppm("test.ppm", &w, &h);
 
-  printf("Testing file test.ppm: %d %d\n", w, h);
+  printf("Testing file feep-raw.ppm: %d %d\n", w, h);
   for (int i = 0; i < w; i++) {
     for (int j = 0; j < h; j++) {
       printf("(%d, %d, %d)  ", pixels2[i * w + j].red, pixels2[i * w + j].green, pixels2[i * w + j].blue);

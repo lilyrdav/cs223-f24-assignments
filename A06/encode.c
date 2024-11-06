@@ -1,11 +1,3 @@
-/*----------------------------------------------
- * Author: Lily Davoren
- * Date: October 13, 2024
- * Description: This program reads in a PPM file and encodes a message in the least significant bit of each color channel of each pixel. 
- * The program reads in a PPM file and a message from the user. The program then encodes the message in the image and writes the new
- * image to a file with the same name as the original file with "-encoded" appended to the name. The program uses the read_ppm() and 
- * write_ppm() functions to read and write the PPM files.
- ---------------------------------------------*/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,8 +5,8 @@
 #include "write_ppm.h"
 
 void char_to_binary(unsigned char c, int binary[8]) {
-  for (int i = 7; i >= 0; i--) {
-    binary[7 - i] = (c >> i) & 1;
+  for (int i = 0; i < 8; i++) {
+    binary[i] = (c >> (7 - i)) & 1;
   }
 }
 
@@ -37,7 +29,7 @@ int main(int argc, char** argv) {
 
   printf("Enter a phrase: ");
   char phrase[100];
-  scanf(" %c", phrase);
+  scanf(" %99[^\n]", phrase);
   int phrase_len = strlen(phrase) + 1;
 
   if (phrase_len > max_chars) {
@@ -46,43 +38,67 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  int bit_idx = 0;
   for (int i = 0; i < phrase_len; i++) {
     int binary[8];
     char_to_binary(phrase[i], binary);
 
     for (int j = 0; j < 8; j++) {
-      int pixel_idx = bit_idx / 3;
-      int color_channel_idx = bit_idx % 3;
+      int pixel_idx = (i * 8 + j) / 3;
+      int channel_idx = (i * 8 + j) % 3;
 
-      if (color_channel_idx == 0) {
-        pixels[pixel_idx].red = (pixels[pixel_idx].red & 0xFE) | binary[j];
-      } else if (color_channel_idx == 1) {
-        pixels[pixel_idx].green = (pixels[pixel_idx].green & 0xFE) | binary[j];
+      if (channel_idx == 0) {
+        int binary_red[8];
+        char_to_binary(pixels[pixel_idx].red, binary_red);
+        binary_red[7] = binary[j];
+        int decimal = 0;
+        for (int k = 0; k < 8; k++) {
+          decimal = decimal * 2 + binary_red[k];
+        }
+        pixels[pixel_idx].red = (unsigned char)decimal;
+      } else if (channel_idx == 1) {
+        int binary_green[8];
+        char_to_binary(pixels[pixel_idx].green, binary_green);
+        binary_green[7] = binary[j];
+        int decimal = 0;
+        for (int k = 0; k < 8; k++) {
+          decimal = decimal * 2 + binary_green[k];
+        }
+        pixels[pixel_idx].green = (unsigned char)decimal;
       } else {
-        pixels[pixel_idx].blue = (pixels[pixel_idx].blue & 0xFE) | binary[j];
+        int binary_blue[8];
+        char_to_binary(pixels[pixel_idx].blue, binary_blue);
+        binary_blue[7] = binary[j];
+        int decimal = 0;
+        for (int k = 0; k < 8; k++) {
+          decimal = decimal * 2 + binary_blue[k];
+        }
+        pixels[pixel_idx].blue = (unsigned char)decimal;
       }
-      bit_idx++;
     }
   }
 
-    char* orig_file = argv[1];
-    char* insert = "-encoded";
-    int new_len = strlen(orig_file) + strlen(insert);
-    char* new_file = (char*)malloc(new_len + 1);
-    strcpy(new_file, orig_file);
-    char* dot_position = strrchr(new_file, '.');
-    if (dot_position != NULL) {
-      *dot_position = '\0';
-    }
-    strcat(new_file, insert);
-    strcat(new_file, ".ppm");
-
-    printf("Writing file %s\n", new_file);
-    write_ppm(new_file, pixels, w, h);
-
-    free(new_file);
+  char* orig_file = argv[1];
+  char* insert = "-encoded";
+  int new_len = strlen(orig_file) + strlen(insert);
+  char* new_file = (char*)malloc(new_len + 1);
+  if (new_file == NULL) {
+    printf("Memory allocation failed\n");
     free(pixels);
+    return 1;
+  }
+  strcpy(new_file, orig_file);
+  char* dot_position = strrchr(new_file, '.');
+  if (dot_position != NULL) {
+    *dot_position = '\0';
+  }
+  strcat(new_file, insert);
+  strcat(new_file, ".ppm");
 
-    return 0;
+  printf("Writing file %s\n", new_file);
+  write_ppm(new_file, pixels, w, h);
+
+  free(new_file);
+  free(pixels);
+
+  return 0;
 }

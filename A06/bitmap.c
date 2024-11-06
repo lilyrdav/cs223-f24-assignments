@@ -20,4 +20,8 @@ int main() {
       unsigned long mask = 0x1ul << (63 - (i * 8 + j));
       printf(" %c", (img & mask) ? '@' : ' ');
     }
-    printf
+    printf("\n");
+  }
+
+  return 0;
+}

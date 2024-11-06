@@ -24,7 +24,7 @@ typedef struct song {
 void songList(song songs[]) {
   printf("Welcome to Lily Davoren's Song List.\n\n");
   for (int i = 0; i < 3; i++) {
-    printf("%d) %-20s artist: %-25s duration: %d:%-20d danceability: %f.2f\n\n", 
+    printf("%d) %-25s artist: %-25s duration: %d:%-20d danceability: %.2f\n\n", 
       i, songs[i].title, songs[i].artist, songs[i].duration/60, songs[i].duration - songs[i].duration/60*60, songs[i].danceability);
   }
   printf("=============================================\n\n");
@@ -43,7 +43,8 @@ int main() {
   printf("Enter a song id to edit [0, 1, 2]: ");
   int id;
   scanf("%d", &id);
-  if (id >= 3){
+  while (id < 0 || id > 2) {
+    while (getchar() != '\n');
     printf("Invalid song id.\n");
     printf("Enter a song id to edit [0, 1, 2]: ");
     scanf("%d", &id);

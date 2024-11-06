@@ -21,6 +21,11 @@ int main(int argc, char* argv[]) {
 
   //Dynamically allocate a 2D array
   char* two_d_array = malloc(sizeof(char) * strlen(argv[1]) * strlen(argv[2]));
+  for (int q = 0; q < strlen(argv[1]); q++) {
+    for (int r = 0; r < strlen(argv[2]); r++) {
+      two_d_array[q * strlen(argv[2]) + r] = 0;
+    }
+  }
 
   //Find the common letter between the two words and make note of the row and column
   int row = -1;
@@ -55,7 +60,7 @@ if (row == -1 || col == -1) {
   //Fill the rest of the 2D array with periods
   for (int o = 0; o < strlen(argv[1]); o++) {
     for (int p = 0; p < strlen(argv[2]); p++) {
-      if (two_d_array[o * strlen(argv[2]) + p] != (argv[1])[o] && two_d_array[o * strlen(argv[2]) + p] != (argv[2])[p]) {
+      if ((two_d_array[o * strlen(argv[2]) + p] == 0) && (two_d_array[o * strlen(argv[2]) + p] == 0)) {
         two_d_array[o * strlen(argv[2]) + p] = '.';
       }
     }

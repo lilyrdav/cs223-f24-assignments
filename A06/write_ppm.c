@@ -26,7 +26,7 @@ void write_ppm(const char* filename, struct ppm_pixel* pixels, int w, int h) {
     
     //Write the header
     fprintf(fp, "P6\n");
-    fprintf(fp, "Created by Lily <3\n");
+    fprintf(fp, "# Created by Lily <3\n");
     fprintf(fp, "%d %d\n", w, h);
     fprintf(fp, "255\n");
     

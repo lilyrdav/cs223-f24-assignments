@@ -29,10 +29,51 @@ int main(int argc, char* argv[]) {
   printf("  X range = [%.4f,%.4f]\n", xmin, xmax);
   printf("  Y range = [%.4f,%.4f]\n", ymin, ymax);
 
-  // todo: your work here
-  // generate pallet
+  struct ppm_pixel* pixels = malloc(sizeof(struct ppm_pixel) * (size*size));
+  struct ppm_pixel* palette = malloc(sizeof(struct ppm_pixel) * maxIterations);
+
   srand(time(0));
+  for (int k = 0; k < maxIterations; k++) {
+    palette[k].red = rand() % 255;
+    palette[k].green = rand() % 255;
+    palette[k].blue = rand() % 255;
+  }
+
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      float xfrac = (float)i / size;
+      float yfrac = (float)j / size;
+      float x0 = xmin + xfrac * (xmax - xmin);
+      float y0 = ymin + yfrac * (ymax - ymin);
+
+      float x = 0;
+      float y = 0;
+      int iter = 0;
+      
+      while (iter < maxIterations && x*x + y*y < 2*2) {
+        float xtemp = x*x - y*y + x0;
+        y = 2*x*y + y0;
+        x = xtemp;
+        iter++;
+      }
+      struct ppm_pixel color = {0, 0, 0}; 
+      if (iter < maxIterations) {
+        color = palette[iter];
+      }
+
+      pixels[i * size + j].red = color.red;
+      pixels[i * size + j].green = color.green;
+      pixels[i * size + j].blue = color.blue;
+    }
+  }
+
+  write_ppm("mandelbrot-output.ppm", pixels, size, size);
+
+  free(pixels);
+  free(palette);
+
+
+  // generate pallet
 
   // compute image
-
 }

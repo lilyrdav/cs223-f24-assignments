@@ -1,3 +1,12 @@
+/**
+* The main driver program for A09 single_mandelbrot.c.
+*
+* This program outputs a PPM image of the mandelbrot set.
+*
+* @author: Lily Davoren
+* @version: November 8, 2024
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -7,7 +16,7 @@
 #include "write_ppm.h"
 
 int main(int argc, char* argv[]) {
-  int size = 480;
+  int size = 2000;
   float xmin = -2.0;
   float xmax = 0.47;
   float ymin = -1.12;
@@ -34,15 +43,20 @@ int main(int argc, char* argv[]) {
 
   srand(time(0));
   for (int k = 0; k < maxIterations; k++) {
-    palette[k].red = rand() % 255;
-    palette[k].green = rand() % 255;
-    palette[k].blue = rand() % 255;
+    palette[k].red = rand() % 256;
+    palette[k].green = rand() % 256;
+    palette[k].blue = rand() % 256;
   }
+
+  double timer;
+  struct timeval tstart, tend;
+
+  gettimeofday(&tstart, NULL);
 
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
-      float xfrac = (float)i / size;
-      float yfrac = (float)j / size;
+      float xfrac = (float)j / size;
+      float yfrac = (float)i / size;
       float x0 = xmin + xfrac * (xmax - xmin);
       float y0 = ymin + yfrac * (ymax - ymin);
 
@@ -67,13 +81,16 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  write_ppm("mandelbrot-output.ppm", pixels, size, size);
+  gettimeofday(&tend, NULL);
+  timer = tend.tv_sec - tstart.tv_sec + (tend.tv_usec - tstart.tv_usec)/1.e6;
+
+  printf("Computed mandelbrot set (%dx%d) in %g seconds\n", size, size, timer);
+  printf("Writing file: mandelbrot-%d-%lld.ppm\n", size, (long long)time(0));
+
+  char filename[100];
+  sprintf(filename, "mandelbrot-%d-%lld.ppm", size, (long long)time(0));
+  write_ppm(filename, pixels, size, size);
 
   free(pixels);
   free(palette);
-
-
-  // generate pallet
-
-  // compute image
 }

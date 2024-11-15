@@ -34,7 +34,6 @@ struct params {
 
 pthread_barrier_t mybarrier;
 pthread_mutex_t mutex;
-pthread_mutex_t max_mutex;
 int global_max_count = 0;
 
 void* compute_mandelbrot(void* user_data) {
@@ -120,13 +119,11 @@ void* compute_mandelbrot(void* user_data) {
       }
     }
   }
-
   printf("Local max count: %d\n", local_max_count);
-  pthread_mutex_lock(&max_mutex);
+
   if (local_max_count > global_max_count) {
     global_max_count = local_max_count;
   }
-  pthread_mutex_unlock(&max_mutex);
   printf("Max Count: %d\n", global_max_count);
 
   pthread_barrier_wait(&mybarrier);

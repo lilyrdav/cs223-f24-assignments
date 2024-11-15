@@ -1,3 +1,12 @@
+/**
+* The main driver program for A10 buddhabrot.c.
+*
+* This program outputs a PPM image of the buddhabrot set using MULTITHREADING.
+*
+* @author: Lily Davoren
+* @version: November 14, 2024
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

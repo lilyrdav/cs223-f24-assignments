@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "read_ppm.h"
-# include <string.h>
+#include <string.h>
 
 char* get_substring(char* string, int position, int length) {
   char* substring = (char*)malloc(length + 1);

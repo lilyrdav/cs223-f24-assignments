@@ -74,6 +74,7 @@ int main(int argc, char** argv) {
 
   if (argc != 4) {
     fprintf(stderr, "usage: ./grep <NumThreads> <Keyword> <Files>");
+    return 1;
   }
 
   char* files_input = argv[3];
@@ -116,15 +117,15 @@ int main(int argc, char** argv) {
   for (int l = 0; l < num_threads; l++) {
     pthread_join(threads[l], NULL);
   }
-  
-  for (int n = 0; n < num_threads; n++) {
-    printf("Thread %d found %d lines containing keyword: %s\n", data[n].id, data[n].line_count, argv[2]);
-  }
 
   gettimeofday(&tend, NULL);
   timer = tend.tv_sec - tstart.tv_sec + (tend.tv_usec - tstart.tv_usec) / 1.e6;
 
   printf("Elapsed time is %g seconds\n", timer);
+  
+  for (int n = 0; n < num_threads; n++) {
+    printf("Thread %d found %d lines containing keyword: %s\n", data[n].id, data[n].line_count, argv[2]);
+  }
 
   for (int m = 0; m < file_count; m++) {
     free(files[m]);

@@ -1,3 +1,12 @@
+/**
+* The main driver program for A12 mylloc_list.c.
+*
+* Malloc/free implementation that implements a free list with first-fit strategy (corresponds to mhysa.c in reading)
+*
+* @author: Lily Davoren
+* @version: December 5, 2024
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

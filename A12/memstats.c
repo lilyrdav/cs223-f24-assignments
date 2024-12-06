@@ -1,3 +1,20 @@
+/**
+* The main driver program for A12 memstats.c.
+*
+* This program implements the function memstats to print the following information:
+    - The total number of memory blocks allocated by malloc, 
+      along with the number of total blocks which are currently in-use
+    - The number of total blocks which are currently free
+    - The total amount of memory allocated by malloc, 
+      along with the total amount of memory currently in-use
+    - The total amount of memory currently free
+    - The amount of underutilised memory as a percentage. This is the percent of memory 
+      that has been allocated by sbrk but not being used by the application.
+*
+* @author: Lily Davoren
+* @version: December 5, 2024
+*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -17,7 +34,7 @@ struct chunk {
 };
 
 void memstats(struct chunk* freelist, void* buffer[], int len) {
-  int total_blocks =  0;
+  int total_blocks = 0;
   int used_blocks = 0;
   int free_blocks = 0;
   int total_memory = 0;
@@ -26,16 +43,17 @@ void memstats(struct chunk* freelist, void* buffer[], int len) {
 
   struct chunk* current = freelist;
   while (current != NULL) {
+    printf("  Chunk at %p, size: %d, used: %d\n", (void*)current, current->size, current->used);
     total_blocks++;
     free_blocks++;
     total_memory += current->size;
     free_memory += current->size;
-    current = current-> next;
+    current = current->next;
   }
 
   for (int i = 0; i < len; i++) {
     if (buffer[i] != NULL) {
-      struct chunk* cnk = ((struct chunk*)buffer[i])-1;
+      struct chunk* cnk = ((struct chunk*)buffer[i]) - 1;
       total_blocks++;
       used_blocks++;
       total_memory += cnk->size;
@@ -43,10 +61,10 @@ void memstats(struct chunk* freelist, void* buffer[], int len) {
     }
   }
 
-  double under_util = (total_memory - used_memory) / (double)total_memory;
+  double under_util = (double)(total_memory - (used_memory + free_memory)) / total_memory;
 
-  printf("Total blocks: %d\nFree blocks: %d\nUsed blocks: %d\n", total_blocks, free_blocks, used_blocks);
-  printf("Total memory allocated: %d\nFree memory: %d\nUsed memory: %d\n", total_memory, free_memory, used_memory);
+  printf("Total blocks: %d Free blocks: %d Used blocks: %d\n", total_blocks, free_blocks, used_blocks);
+  printf("Total memory allocated: %d Free memory: %d Used memory: %d\n", total_memory, free_memory, total_memory - free_memory);
   printf("Underutilized memory: %.2f\n", under_util);
 }
 
